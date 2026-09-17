@@ -1,3 +1,5 @@
+from urllib import response
+
 from app import app
 
 
@@ -7,8 +9,7 @@ def test_home():
     response = client.get("/")
 
     assert response.status_code == 200
-    assert b"CI/CD is working" in response.data
-
+    assert b"This should fail" in response.data
 
 def test_health():
     client = app.test_client()
