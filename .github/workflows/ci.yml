@@ -65,12 +65,12 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -t ghcr.io/${{ github.repository_owner }}/ci-cd-demo:latest .
+            -t ghcr.io\${{ github.repository_owner }}/ci-cd-demo:latest .
 
       - name: Push Docker image
         run: |
           docker push \
-            ghcr.io/${{ github.repository_owner }}/ci-cd-demo:latest
+            ghcr.io\${{ github.repository_owner }}/ci-cd-demo:latest
 
 
   deploy:
@@ -88,7 +88,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker pull ghcr.io/${{ github.repository_owner }}/ci-cd-demo:latest
+            docker pull ghcr.io\${{ github.repository_owner }}/ci-cd-demo:latest
 
             docker stop ci-cd-demo || true
 
@@ -97,4 +97,4 @@ jobs:
             docker run -d \
               --name ci-cd-demo \
               -p 80:5000 \
-              ghcr.io/${{ github.repository_owner }}/ci-cd-demo:latest
+              ghcr.io\${{ github.repository_owner }}/ci-cd-demo:latest
